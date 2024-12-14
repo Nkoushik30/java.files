@@ -1,27 +1,53 @@
 import java.util.*;
-class Hard {
-    public static void main(String[] args) {
-        int a[] = {1, 2, 3, 4, 5, 6, 8, 9, 10};
-        int left = 0, right = a.length - 1;
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter the element to search: ");
-        int search = sc.nextInt();
-        boolean found = false;
-        while (left <= right) {
-            int mid = left + (right - left) / 2; 
-                if (a[mid] == search) {
-                    System.out.println("Found at index: " + mid);
-                    found = true;
-                    break;
-                }
-                else if (a[mid] < search) {
-                    left = mid + 1; 
-                }
-                else {
-                    right = mid - 1;            }
-                } 
-        if (!found) {
-            System.out.println("Element not found");
+
+class binary {
+
+    public static void bin(int[] arr, int key) {
+        int low = 0, high = arr.length - 1; 
+        while (low <= high) {
+            int mid = (low + high) / 2; 
+            if (arr[mid] == key) {
+                System.out.println("Key found at index: " + mid);
+                return;
+            }
+            if (key > arr[mid]) {
+                low = mid + 1;
+            } else {
+                high = mid - 1;
+            }
         }
+        System.out.println("Key not found in the array.");
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the size of the array:");
+        int n = sc.nextInt();
+        int[] arr = new int[n];
+        System.out.println("Enter " + n + " elements:");
+        for (int i = 0; i < n; i++) {
+            arr[i] = sc.nextInt();
+        }
+        System.out.println("Array before sorting:");
+        for (int i = 0; i < n; i++) {
+            System.out.print(arr[i] + " ");
+        }
+        System.out.println();
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    int temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                }
+            }
+        }
+        System.out.println("Array after sorting:");
+        for (int i = 0; i < n; i++) {
+            System.out.print(arr[i] + " ");
+        }
+        System.out.println();
+        System.out.println("Enter the key value:");
+        int key = sc.nextInt();
+        bin(arr, key);
     }
 }
